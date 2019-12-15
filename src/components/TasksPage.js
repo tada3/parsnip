@@ -44,8 +44,8 @@ class TasksPage extends Component {
 
   renderTaskLists() {
     const { onStatusChange, tasks } = this.props;
-
     return TASK_STATUSES.map(status => {
+
       const statusTasks = tasks.filter(task => task.status === status);
       return (
         <TaskList
