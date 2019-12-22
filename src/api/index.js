@@ -15,5 +15,11 @@ export function fetchTasks() {
 }
 
 export function createTask(params) {
-    return client.post('/task', params)
+    return client.post('/tasks', params)
+}
+
+
+
+export function editTask(id, task) {
+    return client.put(`/tasks/${id}`, task)
 }

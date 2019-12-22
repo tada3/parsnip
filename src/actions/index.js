@@ -45,12 +45,30 @@ export function fetchTasksSucceeded(tasks) {
 }
 
 
-export function editTask(id, params = {}) {
+export function editTask(id, params) {
+  return (dispatch, getState) => {
+    var tasks = getState().tasks
+    var currentTask = getTaskById(tasks, id)
+    var updatedTask = Object.assign({}, currentTask, params)
+    api.editTask(id, updatedTask).then(
+      resp => {
+        dispatch(editTaskSucceeded(resp.data))
+      }
+    )
+  }
+}
+
+
+export function editTaskSucceeded(task) {
+  console.log('SUCCEEDED', task)
   return {
-    type: 'EDIT_TASK',
+    type: 'EDIT_TASK_SUCCEEDED',
     payload: {
-      id,
-      params,
+      task,
     },
   };
+}
+
+function getTaskById(tasks, id) {
+  return tasks.find(t => t.id === id)
 }

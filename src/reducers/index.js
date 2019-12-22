@@ -2,16 +2,15 @@
 
 export default function tasks(state = { tasks: [] }, action) {
   switch (action.type) {
-    case 'EDIT_TASK':
-      const { payload } = action;
+    case 'EDIT_TASK_SUCCEEDED':
+      const {payload} = action
       return {
         tasks: state.tasks.map(task => {
-          if (task.id === payload.id) {
-            return Object.assign({}, task, payload.params);
+          if (task.id === payload.task.id) {
+            return payload.task
           }
-
-          return task;
-        }),
+          return task
+        })
       }
     case 'FETCH_TASKS_SUCCEEDED':
       return {
